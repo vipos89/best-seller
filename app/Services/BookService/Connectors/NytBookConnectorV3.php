@@ -49,7 +49,7 @@ class NytBookConnectorV3 implements BestSellerConnectorInterface
      * @param array<string, mixed> $queryParams
      * @return array<string, mixed>
      * @throws NytBooksApiException
-     * @throws RequestException
+     *
      */
     private function sendRequest(string $endpoint, array $queryParams = []): array
     {
@@ -74,5 +74,4 @@ class NytBookConnectorV3 implements BestSellerConnectorInterface
             throw new NytBooksApiException('NYT BOOKS API Exception', $e->getCode());
         }
     }
-
 }

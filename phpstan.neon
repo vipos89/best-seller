@@ -2,7 +2,6 @@ parameters:
     level: 8
     paths:
         - app
-#        - tests
     bootstrapFiles:
         - bootstrap/app.php
     ignoreErrors:

@@ -11,7 +11,7 @@ class BestSellerHistoryResponseDto
         public ?string $copyright,
         public ?int $num_results = 0,
         /** @var array<BookDto> */
-        public array $results
+        public ?array $results = []
     ) {
     }
 

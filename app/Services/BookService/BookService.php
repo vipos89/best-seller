@@ -12,7 +12,8 @@ use App\Services\BookService\Dto\V3\Responses\BestSellerHistoryResponseDto;
 readonly class BookService implements BookServiceInterface
 {
     public function __construct(private BestSellerConnectorInterface $bestSellerConnector)
-    {}
+    {
+    }
 
     /**
      * @param AbstractNytRequestDto $dto

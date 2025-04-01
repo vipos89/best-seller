@@ -12,7 +12,7 @@ RUN_TEST = docker exec $(PHP_CONTAINER) php artisan test
 
 .PHONY: all-fix phpstan phpcs phpcbf
 
-all-fix: phpstan phpcs
+all-fix: phpstan phpcs phpcbf
 
 phpstan:
 	@echo "Running PHPStan..."
@@ -40,6 +40,6 @@ route-clear:
 	@echo "Clearing route cache..."
 	$(ROUTE_CACHE_CLEAR)
 
-tests:
+run-tests:
 	@echo "Running tests..."
 	$(RUN_TESTS)

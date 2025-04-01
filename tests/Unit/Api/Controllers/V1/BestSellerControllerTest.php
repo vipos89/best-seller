@@ -59,7 +59,6 @@ class BestSellerControllerTest extends TestCase
         $this->assertEquals(JsonResponse::HTTP_OK, $response->status());
         $this->assertEquals([
             'status' => 'OK',
-            'copyright' => 'Copyright (c) 2025 The New York Times Company. All Rights Reserved.',
             'num_results' => 1,
             'results' => [['mocked_response']],
         ], $response->getData(true));

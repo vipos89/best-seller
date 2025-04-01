@@ -42,7 +42,6 @@ class BestSellerControllerFeatureTest extends TestCase
         $response->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'status',
-                'copyright',
                 'num_results',
                 'results' => [
                     '*' => [
@@ -52,7 +51,6 @@ class BestSellerControllerFeatureTest extends TestCase
                         'contributor',
                         'contributor_note',
                         'author',
-                        //'isbn',
                         'publisher',
                     ]
                 ]

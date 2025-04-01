@@ -22,7 +22,7 @@ class BestSellerController extends Controller
 
         $hashKey = sprintf('best_sellers_%s', md5(json_encode($dto, JSON_FORCE_OBJECT)));
 
-        $data = Cache::remember($hashKey, 600, function ()use ($dto){
+        $data = Cache::remember($hashKey, 600, function () use ($dto) {
             return $this->bookService->getBestSellersHistory($dto);
         });
 

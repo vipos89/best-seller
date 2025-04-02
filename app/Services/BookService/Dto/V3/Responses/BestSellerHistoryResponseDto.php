@@ -11,7 +11,7 @@ class BestSellerHistoryResponseDto
         public ?string $copyright,
         public ?int $num_results = 0,
         /** @var array<BookDto> */
-        public ?array $results = []
+        public ?array $results = [],
     ) {
     }
 
@@ -25,7 +25,7 @@ class BestSellerHistoryResponseDto
             status: $data['status'],
             copyright: $data['copyright'],
             num_results: $data['num_results'],
-            results: array_map(fn($book) => BookDto::fromArray($book), $data['results'])
+            results: array_map(fn($book) => BookDto::fromArray($book), $data['results']),
         );
     }
 }

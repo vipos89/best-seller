@@ -13,7 +13,7 @@ class BestSellerRequestDto extends AbstractNytRequestDto
         /** @var array<string> */
         public readonly ?array $isbn,
         public readonly ?string $title,
-        public readonly ?int $offset
+        public readonly ?int $offset,
     ) {
     }
 
@@ -27,7 +27,7 @@ class BestSellerRequestDto extends AbstractNytRequestDto
             author: $data['author'] ?? null,
             isbn: $data['isbn'] ?? null,
             title: $data['title'] ?? null,
-            offset: isset($data['offset']) ? (int)$data['offset'] : null
+            offset: isset($data['offset']) ? (int)$data['offset'] : null,
         );
     }
 

@@ -8,7 +8,7 @@ readonly class IsbnDto
 {
     public function __construct(
         public string $isbn10,
-        public string $isbn13
+        public string $isbn13,
     ) {
     }
 
@@ -20,7 +20,7 @@ readonly class IsbnDto
     {
         return new self(
             isbn10: $data['isbn10'],
-            isbn13: $data['isbn13']
+            isbn13: $data['isbn13'],
         );
     }
 }

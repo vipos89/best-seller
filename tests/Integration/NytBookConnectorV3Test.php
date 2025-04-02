@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace tests\Integration;
 
+use app\Services\BookService\Connectors\NytBookConnectorV3;
 use app\Services\BookService\Exceptions\NytBooksApiException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class NytBookConnectorV3Test extends TestCase
@@ -26,7 +28,7 @@ class NytBookConnectorV3Test extends TestCase
             '*' => Http::response([
                 'status' => 'OK',
                 'results' => []
-            ], 200)
+            ], Response::HTTP_OK)
         ]);
 
         $queryParams = [
@@ -52,11 +54,11 @@ class NytBookConnectorV3Test extends TestCase
                 'fault' => [
                     'faultstring' => 'API Key Invalid'
                 ]
-            ], 401)
+            ], Response::HTTP_UNAUTHORIZED)
         ]);
 
         $this->expectException(NytBooksApiException::class);
-        $this->expectExceptionCode(401);
+        $this->expectExceptionCode(Response::HTTP_UNAUTHORIZED);
 
         $this->connector->getBestSellersHistory();
     }
@@ -76,9 +78,9 @@ class NytBookConnectorV3Test extends TestCase
     public function test_retries_on_failure(): void
     {
         $responses = collect([
-            Http::response(null, JsonResponse::HTTP_INTERNAL_SERVER_ERROR),
-            Http::response(null, JsonResponse::HTTP_INTERNAL_SERVER_ERROR),
-            Http::response(['status' => 'OK', 'results' => []], JsonResponse::HTTP_OK)
+            Http::response(null, Response::HTTP_INTERNAL_SERVER_ERROR),
+            Http::response(null, Response::HTTP_INTERNAL_SERVER_ERROR),
+            Http::response(['status' => 'OK', 'results' => []], Response::HTTP_OK)
         ]);
 
         Http::fake(fn () => $responses->shift());

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NytBooksApiExceptionTest extends TestCase
 {
-    public function test_exception_construction()
+    public function test_exception_construction(): void
     {
         $message = 'Custom error message';
         $code = 500;
@@ -22,7 +22,7 @@ class NytBooksApiExceptionTest extends TestCase
         $this->assertEquals($code, $exception->getCode());
     }
 
-    public function test_default_values_in_constructor()
+    public function test_default_values_in_constructor(): void
     {
         $exception = new NytBooksApiException();
 
@@ -30,7 +30,7 @@ class NytBooksApiExceptionTest extends TestCase
         $this->assertEquals(0, $exception->getCode());
     }
 
-    public function test_render_method()
+    public function test_render_method(): void
     {
         $exception = new NytBooksApiException();
         $response = $exception->render();
@@ -40,7 +40,7 @@ class NytBooksApiExceptionTest extends TestCase
         $this->assertEquals(['error' => 'Service Unavailable'], $response->getData(true));
     }
 
-    public function test_render_with_custom_message()
+    public function test_render_with_custom_message(): void
     {
         $customMessage = 'Custom Unavailable';
         $exception = new NytBooksApiException($customMessage);

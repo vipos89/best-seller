@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\Http\Requests\V1;
 
 use App\Rules\IsbnRule;

@@ -8,7 +8,6 @@ use App\Services\BookService\Contracts\Connectors\BestSellerConnectorInterface;
 use App\Services\BookService\Exceptions\NytBooksApiException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -59,11 +58,9 @@ class NytBookConnectorV3 implements BestSellerConnectorInterface
             if ($response->failed()) {
                 throw new NytBooksApiException('NYT BOOKS API Connection Error', $response->status());
             }
-
-            return $response->json();
         } catch (ConnectionException $e) {
             throw new NytBooksApiException('Failed to connect to NYT Books API.', $e->getCode());
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('NYT BOOKS Exception: ', [
                 'endpoint' => $endpoint,
                 'status' => $e->getCode(),
@@ -73,5 +70,7 @@ class NytBookConnectorV3 implements BestSellerConnectorInterface
 
             throw new NytBooksApiException('NYT BOOKS API Exception', $e->getCode());
         }
+
+        return $response->json();
     }
 }

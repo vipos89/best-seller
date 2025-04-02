@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class IsbnDtoTest extends TestCase
 {
-    public function test_constructor_and_properties()
+    public function test_constructor_and_properties(): void
     {
         $isbn10 = '0123456789';
         $isbn13 = '978-0123456789';
@@ -20,7 +20,7 @@ class IsbnDtoTest extends TestCase
         $this->assertEquals($isbn13, $dto->isbn13);
     }
 
-    public function test_from_array_creation()
+    public function test_from_array_creation(): void
     {
         $data = [
             'isbn10' => '1234567890',
@@ -34,7 +34,7 @@ class IsbnDtoTest extends TestCase
         $this->assertEquals($data['isbn13'], $dto->isbn13);
     }
 
-    public function test_from_array_with_missing_keys_throws_error()
+    public function test_from_array_with_missing_keys_throws_error(): void
     {
         $this->expectException(\Error::class);
 
@@ -46,7 +46,7 @@ class IsbnDtoTest extends TestCase
         IsbnDto::fromArray($invalidData);
     }
 
-    public function test_properties_are_readonly()
+    public function test_properties_are_readonly(): void
     {
         $dto = new IsbnDto('1234567890', '978-1234567890');
 

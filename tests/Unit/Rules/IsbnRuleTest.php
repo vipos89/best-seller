@@ -14,7 +14,7 @@ class IsbnRuleTest extends TestCase
         $this->rule = new IsbnRule();
     }
 
-    public function test_it_validates_valid_isbn10()
+    public function test_it_validates_valid_isbn10(): void
     {
         $validIsbns = [
             '0306406152', // Valid ISBN-10
@@ -34,7 +34,7 @@ class IsbnRuleTest extends TestCase
         }
     }
 
-    public function test_rejects_invalid_isbn10()
+    public function test_rejects_invalid_isbn10(): void
     {
         $invalidIsbns = [
             '0306406153', // Wrong check digit
@@ -56,7 +56,7 @@ class IsbnRuleTest extends TestCase
         }
     }
 
-    public function test_it_validates_valid_isbn13()
+    public function test_it_validates_valid_isbn13(): void
     {
         $validIsbns = [
             '9780306406157', // Valid ISBN-13
@@ -86,7 +86,7 @@ class IsbnRuleTest extends TestCase
         }
     }
 
-    public function test_it_rejects_invalid_isbn13()
+    public function test_it_rejects_invalid_isbn13(): void
     {
         $invalidIsbns = [
             '9780306406158', // Wrong check digit
@@ -107,7 +107,7 @@ class IsbnRuleTest extends TestCase
         }
     }
 
-    public function test_it_accepts_either_isbn10_or_isbn13()
+    public function test_it_accepts_either_isbn10_or_isbn13(): void
     {
         $validCases = [
             '0306406152', // ISBN-10
@@ -125,7 +125,7 @@ class IsbnRuleTest extends TestCase
         }
     }
 
-    public function test_it_rejects_non_isbn_values()
+    public function test_it_rejects_non_isbn_values(): void
     {
         $invalidCases = [
             '',
@@ -147,7 +147,7 @@ class IsbnRuleTest extends TestCase
         }
     }
 
-    public function test_it_handles_non_string_values()
+    public function test_it_handles_non_string_values(): void
     {
         $invalidCases = [
             null,

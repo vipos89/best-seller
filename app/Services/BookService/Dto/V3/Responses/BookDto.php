@@ -20,7 +20,7 @@ readonly class BookDto
         /** @var array<RankHistoryDto> */
         public array $ranks_history = [],
         /** @var array<ReviewDto> */
-        public array $reviews = []
+        public array $reviews = [],
     ) {
     }
 
@@ -41,7 +41,7 @@ readonly class BookDto
             publisher: $data['publisher'],
             isbns: array_map(fn($isbn) => IsbnDto::fromArray($isbn), $data['isbns'] ?? []),
             ranks_history: array_map(fn($rank) => RankHistoryDto::fromArray($rank), $data['ranks_history'] ?? []),
-            reviews: array_map(fn($review) => ReviewDto::fromArray($review), $data['reviews'] ?? [])
+            reviews: array_map(fn($review) => ReviewDto::fromArray($review), $data['reviews'] ?? []),
         );
     }
 }

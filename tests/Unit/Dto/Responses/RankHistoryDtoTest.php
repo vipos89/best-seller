@@ -27,7 +27,7 @@ class RankHistoryDtoTest extends TestCase
         ];
     }
 
-    public function test_constructor_and_properties()
+    public function test_constructor_and_properties(): void
     {
         $dto = new RankHistoryDto(
             '0123456789',
@@ -56,7 +56,7 @@ class RankHistoryDtoTest extends TestCase
         $this->assertEquals(0, $dto->dagger);
     }
 
-    public function test_from_array_creation()
+    public function test_from_array_creation(): void
     {
         $dto = RankHistoryDto::fromArray($this->sampleData);
 
@@ -74,7 +74,7 @@ class RankHistoryDtoTest extends TestCase
         $this->assertEquals($this->sampleData['dagger'], $dto->dagger);
     }
 
-    public function test_nullable_ranks_last_week()
+    public function test_nullable_ranks_last_week(): void
     {
         $data = $this->sampleData;
         unset($data['ranks_last_week']);
@@ -84,7 +84,7 @@ class RankHistoryDtoTest extends TestCase
         $this->assertNull($dto->ranks_last_week);
     }
 
-    public function test_missing_required_fields_throws_error()
+    public function test_missing_required_fields_throws_error(): void
     {
         $this->expectException(\Error::class);
 
@@ -94,7 +94,7 @@ class RankHistoryDtoTest extends TestCase
         RankHistoryDto::fromArray($invalidData);
     }
 
-    public function test_readonly_properties()
+    public function test_readonly_properties(): void
     {
         $dto = RankHistoryDto::fromArray($this->sampleData);
 
@@ -102,7 +102,7 @@ class RankHistoryDtoTest extends TestCase
         $dto->rank = 10;
     }
 
-    public function test_type_safety()
+    public function test_type_safety(): void
     {
         $this->expectException(\TypeError::class);
 
@@ -112,7 +112,7 @@ class RankHistoryDtoTest extends TestCase
         RankHistoryDto::fromArray($invalidData);
     }
 
-    public function test_with_minimal_data()
+    public function test_with_minimal_data(): void
     {
         $minimalData = [
             'primary_isbn10' => '1234567890',

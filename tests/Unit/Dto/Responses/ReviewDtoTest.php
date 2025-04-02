@@ -16,13 +16,13 @@ class ReviewDtoTest extends TestCase
         'article_chapter_link' => 'https://article.com'
     ];
 
-    public function test_creation()
+    public function test_creation(): void
     {
         $dto = new ReviewDto(...array_values($this->fullData));
         $this->assertInstanceOf(ReviewDto::class, $dto);
     }
 
-    public function test_from_array()
+    public function test_from_array(): void
     {
         $dto = ReviewDto::fromArray($this->fullData);
         foreach ($this->fullData as $key => $value) {
@@ -30,20 +30,20 @@ class ReviewDtoTest extends TestCase
         }
     }
 
-    public function test_nullable_fields()
+    public function test_nullable_fields(): void
     {
         $dto = ReviewDto::fromArray([]);
         $this->assertNull($dto->book_review_link);
     }
 
-    public function test_readonly()
+    public function test_readonly(): void
     {
         $dto = ReviewDto::fromArray($this->fullData);
         $this->expectException(\Error::class);
         $dto->book_review_link = 'new';
     }
 
-    public function test_type_safety()
+    public function test_type_safety(): void
     {
         $this->expectException(\TypeError::class);
         ReviewDto::fromArray(['book_review_link' => 123]);

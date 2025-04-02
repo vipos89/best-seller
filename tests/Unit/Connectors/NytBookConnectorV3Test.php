@@ -4,10 +4,9 @@ namespace tests\Unit\Connectors;
 
 use App\Services\BookService\Connectors\NytBookConnectorV3;
 use App\Services\BookService\Exceptions\NytBooksApiException;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Mockery;
 use Tests\TestCase;
 
 class NytBookConnectorV3Test extends TestCase
@@ -31,7 +30,7 @@ class NytBookConnectorV3Test extends TestCase
                         'author' => 'Sophia Amoruso',
                     ],
                 ],
-            ], 200),
+            ], JsonResponse::HTTP_OK),
         ]);
 
         $connector = new NytBookConnectorV3();
@@ -49,32 +48,29 @@ class NytBookConnectorV3Test extends TestCase
     {
         // Mock a connection error
         Http::fake([
-            '*history.json*' => Http::response([], 500),
+            '*history.json*' => Http::response([], JsonResponse::HTTP_INTERNAL_SERVER_ERROR),
         ]);
 
         Log::shouldReceive('error')
             ->once();
 
 
-
-        $this->expectExceptionCode(500);
+        $this->expectExceptionCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
 
 
         $connector = new NytBookConnectorV3();
         $connector->getBestSellersHistory();
-
-
     }
 
     public function testGetBestSellersHistoryNotFound()
     {
         // Mock a 404 error
         Http::fake([
-            '*history.json*' => Http::response([], 404),
+            '*history.json*' => Http::response([], JsonResponse::HTTP_NOT_FOUND),
         ]);
 
         $this->expectException(NytBooksApiException::class);
-        $this->expectExceptionCode(404);
+        $this->expectExceptionCode(JsonResponse::HTTP_NOT_FOUND);
 
         $connector = new NytBookConnectorV3();
         $connector->getBestSellersHistory();
@@ -84,11 +80,11 @@ class NytBookConnectorV3Test extends TestCase
     {
         // Mock a timeout error
         Http::fake([
-            '*history.json*' => Http::response([], 500),
+            '*history.json*' => Http::response([], JsonResponse::HTTP_INTERNAL_SERVER_ERROR),
         ]);
 
         $this->expectException(NytBooksApiException::class);
-        $this->expectExceptionCode(500);
+        $this->expectExceptionCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
 
         $connector = new NytBookConnectorV3();
         $connector->getBestSellersHistory();
@@ -124,7 +120,7 @@ class NytBookConnectorV3Test extends TestCase
     public function testLoggingOnError()
     {
         Http::fake([
-            '*history.json*' => Http::response([], 500),
+            '*history.json*' => Http::response([], JsonResponse::HTTP_INTERNAL_SERVER_ERROR),
         ]);
 
         Log::shouldReceive('error')

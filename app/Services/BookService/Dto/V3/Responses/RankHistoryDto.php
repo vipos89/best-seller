@@ -17,7 +17,7 @@ readonly class RankHistoryDto
         public int $weeks_on_list,
         public ?int $ranks_last_week,
         public int $asterisk,
-        public int $dagger
+        public int $dagger,
     ) {
     }
 
@@ -38,7 +38,7 @@ readonly class RankHistoryDto
             weeks_on_list: $data['weeks_on_list'],
             ranks_last_week: $data['ranks_last_week'] ?? null,
             asterisk: $data['asterisk'],
-            dagger: $data['dagger']
+            dagger: $data['dagger'],
         );
     }
 }

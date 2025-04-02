@@ -10,7 +10,7 @@ readonly class ReviewDto
         public ?string $book_review_link,
         public ?string $first_chapter_link,
         public ?string $sunday_review_link,
-        public ?string $article_chapter_link
+        public ?string $article_chapter_link,
     ) {
     }
 
@@ -24,7 +24,7 @@ readonly class ReviewDto
             book_review_link: $data['book_review_link'] ?? null,
             first_chapter_link: $data['first_chapter_link'] ?? null,
             sunday_review_link: $data['sunday_review_link'] ?? null,
-            article_chapter_link: $data['article_chapter_link'] ?? null
+            article_chapter_link: $data['article_chapter_link'] ?? null,
         );
     }
 }

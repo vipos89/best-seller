@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Rules;
 
 use Closure;
@@ -7,6 +9,13 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class IsbnRule implements ValidationRule
 {
+
+    private const string ISBN10_FORMAT_PATTERN = '/^\d{9}[\dX]$/';
+    private const string ISBN13_FORMAT_PATTERN = '/^\d{13}$/';
+
+    private const int ISBN10_LEN = 10;
+    private const int ISBN13_LEN = 13;
+
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $value = is_string($value) ? strtoupper(str_replace(['-', ' '], '', $value)) : '';
@@ -16,13 +25,17 @@ class IsbnRule implements ValidationRule
         }
     }
 
+    /**
+     * @param string $value
+     * @return bool
+     */
     private function isValidISBN10(string $value): bool
     {
-        if (!$this->isValidLength($value, 10)) {
+        if (!$this->isValidLength($value, self::ISBN10_LEN)) {
             return false;
         }
 
-        if (!$this->isCorrectFormat($value, '/^\d{9}[\dX]$/')) {
+        if (!$this->isCorrectFormat($value, self::ISBN10_FORMAT_PATTERN)) {
             return false;
         }
 
@@ -35,13 +48,17 @@ class IsbnRule implements ValidationRule
         return $sum % 11 === 0;
     }
 
+    /**
+     * @param string $value
+     * @return bool
+     */
     private function isValidISBN13(string $value): bool
     {
-        if (!$this->isValidLength($value, 13)) {
+        if (!$this->isValidLength($value, self::ISBN13_LEN)) {
             return false;
         }
 
-        if (!$this->isCorrectFormat($value, '/^\d{13}$/')) {
+        if (!$this->isCorrectFormat($value, self::ISBN13_FORMAT_PATTERN)) {
             return false;
         }
 
@@ -54,6 +71,11 @@ class IsbnRule implements ValidationRule
         return $sum % 10 === 0;
     }
 
+    /**
+     * @param string $value
+     * @param int $length
+     * @return bool
+     */
     private function isValidLength(string $value, int $length): bool
     {
         return strlen($value) === $length;

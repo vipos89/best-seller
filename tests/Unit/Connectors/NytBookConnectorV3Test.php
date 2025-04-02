@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace tests\Unit\Connectors;
 
 use App\Services\BookService\Connectors\NytBookConnectorV3;

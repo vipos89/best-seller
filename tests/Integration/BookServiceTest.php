@@ -7,7 +7,6 @@ namespace tests\Integration;
 use app\Services\BookService\BookService;
 use app\Services\BookService\Connectors\NytBookConnectorV3;
 use app\Services\BookService\Dto\V3\Requests\BestSellerRequestDto;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use tests\TestCase;

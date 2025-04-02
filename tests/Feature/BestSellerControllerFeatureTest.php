@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\Feature;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;

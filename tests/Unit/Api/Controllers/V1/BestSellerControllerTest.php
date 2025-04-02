@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BestSellerController;

@@ -48,5 +48,4 @@ class NytBooksApiExceptionTest extends TestCase
 
         $this->assertEquals(['error' => 'Service Unavailable'], $response->getData(true));
     }
-
 }

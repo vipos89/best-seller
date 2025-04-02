@@ -9,7 +9,6 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class IsbnRule implements ValidationRule
 {
-
     private const string ISBN10_FORMAT_PATTERN = '/^\d{9}[\dX]$/';
     private const string ISBN13_FORMAT_PATTERN = '/^\d{13}$/';
 
